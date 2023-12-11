@@ -20,20 +20,22 @@ export default function Restaurants() {
       }}
     >
       {restaurants.map((restaurant, index) => (
-        <TouchableOpacity>
-          <View style={styles.categoryCard}>
-            <Image source={restaurant.img} style={styles.image} />
-            <View style={styles.categoryBox}>
-              <Text style={styles.categoryText}>{restaurant.name}</Text>
-              <Text style={{ color: Colors.green }}>
-                {restaurant.rating} {restaurant.ratings}
-              </Text>
-              <Text style={{ color: Colors.medium }}>
-                {restaurant.distance}
-              </Text>
+        <Link href={"/details"} key={index} asChild>
+          <TouchableOpacity>
+            <View style={styles.categoryCard}>
+              <Image source={restaurant.img} style={styles.image} />
+              <View style={styles.categoryBox}>
+                <Text style={styles.categoryText}>{restaurant.name}</Text>
+                <Text style={{ color: Colors.green }}>
+                  {restaurant.rating} {restaurant.ratings}
+                </Text>
+                <Text style={{ color: Colors.medium }}>
+                  {restaurant.distance}
+                </Text>
+              </View>
             </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </Link>
       ))}
     </ScrollView>
   );
