@@ -7,10 +7,12 @@ import {
   Image,
   TextInput,
 } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import { Link } from "expo-router";
+import BottomSheet from "./BottomSheet";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 
 const SearchBar = () => (
   <View style={styles.searchContainer}>
@@ -24,7 +26,7 @@ const SearchBar = () => (
         />
         <TextInput placeholder="Search" style={styles.input} />
       </View>
-      <Link href="/" asChild>
+      <Link href="/(modal)/filter" asChild>
         <TouchableOpacity style={styles.optionButton}>
           <Ionicons name="options-outline" size={20} color={Colors.primary} />
         </TouchableOpacity>
@@ -32,11 +34,16 @@ const SearchBar = () => (
     </View>
   </View>
 );
-export default function CustomHeader() {
+const CustomHeader=()=> {
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
+  const openModal = () => {
+    bottomSheetRef.current?.present();
+  };
   return (
     <SafeAreaView style={styles.safeArea}>
+      <BottomSheet ref={bottomSheetRef}/>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => console.log("Salut")}>
+        <TouchableOpacity onPress={openModal}>
           <Image
             style={styles.bike}
             source={require("../assets/images/bike.png")}
@@ -131,3 +138,5 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
 });
+
+export default CustomHeader;
