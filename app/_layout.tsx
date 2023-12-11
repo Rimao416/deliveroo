@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, useNavigation } from "expo-router";
 import CustomHeader from "../components/CustomHeader";
 import {
   BottomSheetModal,
@@ -13,6 +13,7 @@ export const unstable_settings = {
 };
 
 export default function RootLayoutNav() {
+  const navigation = useNavigation();
   return (
     <BottomSheetModalProvider>
       <Stack>
@@ -32,7 +33,31 @@ export default function RootLayoutNav() {
               backgroundColor: Colors.lightGrey,
             },
             headerLeft: () => (
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <Ionicons
+                  name="close-outline"
+                  size={28}
+                  color={Colors.primary}
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="(modal)/location-search"
+          options={{
+            presentation: "fullScreenModal",
+            headerTitle: "Search Location",
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
                 <Ionicons
                   name="close-outline"
                   size={28}
